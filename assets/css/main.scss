@@ -1,0 +1,146 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+@charset "utf-8";
+
+/* Built-in Sass modules you’ll likely use across partials */
+@use "sass:math";
+@use "sass:string";
+
+/* Configure your design tokens BEFORE loading any of your partials.
+   Make sure `_sass/_variables.scss` declares `$max-content-width: 72rem !default;` */
+@use "variables" with (
+  $max-content-width: {{ site.max_width | default:  "930px" }}
+);
+
+/* Your project partials — convert these files to `@use "variables";`
+   (or `@use "variables" as *;`) inside each file and qualify variables if needed. */
+@use "themes";
+@use "layout";
+
+// Core styles organized by usage
+@use "typography";
+@use "navbar";
+@use "footer";
+@use "blog";
+@use "publications";
+@use "components";
+@use "utilities";
+
+// Other specialized styles
+@use "tabs";
+@use "teachings";
+@use "typograms";
+
+// -----------------------------------------------------------------------------
+// Site customizations (local override of al_folio_core's main.scss)
+// -----------------------------------------------------------------------------
+body {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 1.15rem;
+  line-height: 1.32;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.post-title {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+}
+
+.post article p {
+  margin-bottom: 1.1rem;
+}
+
+// Accent color (links, highlighted words): blue instead of purple
+:root {
+  --global-theme-color: #1a73e8;
+  --global-hover-color: #1558b0;
+}
+
+html[data-theme="dark"] {
+  --global-theme-color: #6ea8fe;
+  --global-hover-color: #9ec5fe;
+}
+
+// Text under the profile photo: much smaller
+.profile .more-info {
+  font-size: 0.75rem;
+  line-height: 1.3;
+}
+
+// Profile photo: smaller on desktop (theme default is 30% of the page width)
+@media (min-width: 576px) {
+  .profile {
+    width: 20%;
+  }
+}
+
+// Circular profile photo: crop to a square so it's a true circle, not an oval
+.profile img.rounded-circle {
+  aspect-ratio: 1 / 1;
+  object-fit: contain; // show the whole photo, scaled to the circle's height
+  background-color: #e2e2e2; // fill the empty sides with the photo's grey background
+}
+
+// Email link under the profile photo: centered, same font as the page
+.profile .more-info {
+  font-family: "Lato", sans-serif;
+  font-size: 1.05rem;
+  text-align: center;
+}
+
+// Icon row under the profile photo (email, Scholar, GitHub, LinkedIn)
+.profile .profile-socials {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-top: 0.8rem;
+  font-size: 2rem;
+  line-height: 1;
+
+  a {
+    color: var(--global-text-color);
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: var(--global-theme-color);
+  }
+}
+
+// More space above the "Publications" section on the about page
+.post article h2#publications {
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+}
+
+// Publications: preview image ~1/4 of the width on the left, text uses the rest
+@media (min-width: 576px) {
+  .publications .row > .col-sm-2.abbr {
+    flex: 0 0 19%;
+    max-width: 19%;
+  }
+
+  .publications .row > .col-sm-8 {
+    flex: 0 0 81%;
+    max-width: 81%;
+    padding-left: 1.5rem;
+  }
+}
+
+.publications .preview {
+  width: 100%;
+  border-radius: 8px;
+  pointer-events: none; // disable click-to-zoom on publication images
+}
+
+// Publications: hide the venue/year line (shown in the badge instead)
+.publications .periodical {
+  display: none;
+}
