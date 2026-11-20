@@ -1,4 +1,3 @@
-
 ---
 layout: about
 title: about
@@ -42,5 +41,5 @@ robotic manipulation.
 
 I received my Diploma in Electrical and Computer Engineering from
 NTUA in 2025. My diploma thesis,
-*[Occlusion-Robust Audiovisual Face Reconstruction with Temporal Modeling](https://dspace.lib.ntua.gr/xmlui/handle/123456789/64359?show=full)*,
+_[Occlusion-Robust Audiovisual Face Reconstruction with Temporal Modeling](https://dspace.lib.ntua.gr/xmlui/handle/123456789/64359?show=full)_,
 was conducted under the supervision of Prof. Petros Maragos.
